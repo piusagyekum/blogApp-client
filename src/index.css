@@ -52,3 +52,7 @@ input::placeholder {
 #add-blog-form .error {
   @apply text-xs text-red-600;
 }
+
+input[type="submit"]:disabled{
+@apply cursor-not-allowed bg-gray-400 !important;
+}

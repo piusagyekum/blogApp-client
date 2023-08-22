@@ -7,15 +7,19 @@ const blogReducer = (state, action) => {
       return { blogs: action.payload }
     case "ADD_WORKOUT":
       return { blogs: [action.payload, ...state.blogs] }
-      case 'DLELTE_WORKOUT':
-        return {}
+    case "DELETE_BLOG":
+      return {
+        blogs: state.blogs.filter(blog => {
+          return blog._id !== action.payload
+        }),
+      }
     default:
       return state
   }
 }
 
 export const BlogContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(blogReducer, { blogs:[] })
+  const [state, dispatch] = useReducer(blogReducer, { blogs: [] })
   return (
     <BlogContext.Provider value={{ ...state, dispatch }}>
       {children}

@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form"
 import { DevTool } from "@hookform/devtools"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { UrlContext } from "../Context/UrlContext"
 import { BlogContext } from "../Context/BlogContext"
 const BlogForm = () => {
@@ -8,9 +8,11 @@ const BlogForm = () => {
   const { dispatch } = useContext(BlogContext)
   const form = useForm()
   const { register, control, handleSubmit, formState } = form
+  const [addingBlog, setAddingBlog] = useState(false)
 
   const submitFunction = async formData => {
     try {
+      setAddingBlog(true)
       const response = await fetch(`${url}/blogs/add`, {
         method: "POST",
         headers: {
@@ -20,13 +22,14 @@ const BlogForm = () => {
       })
       const json = await response.json()
       if (response.ok) {
-        console.log(json.result)
-        dispatch({type:'ADD_WORKOUT', payload:json.result})
+        dispatch({ type: "ADD_WORKOUT", payload: json.result })
       } else {
-        throw "Response was not in the 200 range"
+        throw Error("Response was not in the 200 range")
       }
     } catch (error) {
-      console.log(error)
+      console.log(error.message)
+    } finally {
+      setAddingBlog(false)
     }
   }
 
@@ -65,7 +68,11 @@ const BlogForm = () => {
           {...register("body", { required: "Blog content is required" })}
         />
         <p className="error">{formState.errors.body?.message}</p>
-        <input type="submit" value="Add Blog" />
+        <input
+          type="submit"
+          value={addingBlog ? "Adding..." : "Add Blog"}
+          disabled={addingBlog ? true : false}
+        />
       </form>
       <DevTool control={control} />
     </>
