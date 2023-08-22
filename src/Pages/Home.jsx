@@ -24,7 +24,7 @@ const Home = () => {
     }
 
     fetchPosts()
-  }, [url])
+  }, [url,dispatch])
 
   return (
     <main className="grid grid-cols-12 gap-10 px-10">

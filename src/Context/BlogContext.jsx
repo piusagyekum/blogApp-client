@@ -7,6 +7,8 @@ const blogReducer = (state, action) => {
       return { blogs: action.payload }
     case "ADD_WORKOUT":
       return { blogs: [action.payload, ...state.blogs] }
+      case 'DLELTE_WORKOUT':
+        return {}
     default:
       return state
   }

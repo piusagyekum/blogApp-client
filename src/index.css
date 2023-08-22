@@ -4,9 +4,8 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
-    --accent: #4ade80;
+  --accent: #4ade80;
 }
 
 *,
@@ -38,7 +37,18 @@ body {
   @apply p-2 bg-[var(--accent)] bg-opacity-0 rounded-md text-white cursor-pointer;
 }
 
+#add-blog-form input:has(+ p:not(:empty)),
+#add-blog-form textarea:has(+ p:not(:empty)) {
+  @apply mb-0;
+}
 
-input::placeholder{
-@apply text-base;
+#add-blog-form .error:not(:empty) {
+  @apply mb-3;
+}
+input::placeholder {
+  @apply text-base;
+}
+
+#add-blog-form .error {
+  @apply text-xs text-red-600;
 }
