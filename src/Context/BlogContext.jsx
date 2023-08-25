@@ -5,7 +5,7 @@ const blogReducer = (state, action) => {
   switch (action.type) {
     case "SET_BLOGS":
       return { blogs: action.payload }
-    case "ADD_WORKOUT":
+    case "ADD_BLOG":
       return { blogs: [action.payload, ...state.blogs] }
     case "DELETE_BLOG":
       return {

@@ -34,6 +34,7 @@ const Home = () => {
         {!loading && blogs.length === 0 ? <p className="text-center">No blogs to display</p> : ""}
       </div>
       <div className=" col-span-12 md:col-span-4">
+        <h3 className="font-semibold">Add New Blog</h3>
         <BlogForm />
       </div>
     </main>

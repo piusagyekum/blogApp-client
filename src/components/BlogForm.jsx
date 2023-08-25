@@ -7,7 +7,7 @@ const BlogForm = () => {
   const { url } = useContext(UrlContext)
   const { dispatch } = useContext(BlogContext)
   const form = useForm()
-  const { register, control, handleSubmit, formState } = form
+  const { register, control, handleSubmit, formState , reset} = form
   const [addingBlog, setAddingBlog] = useState(false)
 
   const submitFunction = async formData => {
@@ -22,7 +22,9 @@ const BlogForm = () => {
       })
       const json = await response.json()
       if (response.ok) {
-        dispatch({ type: "ADD_WORKOUT", payload: json.result })
+        dispatch({ type: "ADD_BLOG", payload: json.result })
+        reset()
+
       } else {
         throw Error("Response was not in the 200 range")
       }
