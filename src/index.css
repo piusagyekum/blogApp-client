@@ -21,7 +21,7 @@ body {
   @apply bg-gray-100;
 }
 
-#add-blog-form label {
+#add-blog-form label,#login-form label {
   @apply block mb-1;
 }
 
@@ -33,10 +33,13 @@ body {
   @apply w-full mb-3 border resize-y px-3;
 }
 
-#add-blog-form input[type="submit"] {
+#signup-form input[type="submit"],
+#add-blog-form input[type="submit"],
+#login-form input[type="submit"] {
   @apply p-2 bg-[var(--accent)] bg-opacity-0 rounded-md text-white cursor-pointer;
 }
 
+#login-form input:has(+ p:not(:empty)),
 #add-blog-form input:has(+ p:not(:empty)),
 #add-blog-form textarea:has(+ p:not(:empty)) {
   @apply mb-0;
@@ -46,13 +49,15 @@ body {
   @apply mb-3;
 }
 input::placeholder {
-  @apply text-base;
+  @apply text-sm;
 }
 
 #add-blog-form .error {
   @apply text-xs text-red-600;
 }
 
-input[type="submit"]:disabled{
-@apply cursor-not-allowed bg-gray-400 !important;
+input[type="submit"]:disabled {
+  @apply cursor-not-allowed bg-gray-400 !important;
 }
+
+
