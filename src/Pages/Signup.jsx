@@ -1,13 +1,12 @@
 import { useForm } from "react-hook-form"
+import { useSignup } from "../hooks/useSignup"
+
 const Signup = () => {
+  const { loading, error, signup } = useSignup()
   const signupForm = useForm()
-  const {
-    register,
-    handleSubmit,
-    formState: { error },
-  } = signupForm
-  const signupFn = formData => {
-    console.log("🚀 ~ file: signup.jsx:6 ~ signupFn ~ formData:", formData)
+  const { register, handleSubmit, formState } = signupForm
+  const signupFn = async (credentials) => {
+    await signup(credentials)
   }
 
   return (
@@ -18,7 +17,12 @@ const Signup = () => {
         noValidate
         onSubmit={handleSubmit(signupFn)}
       >
-        <h3 className="text-xl font-bold text-center mb-1">signup</h3>
+        <h3 className="text-xl font-bold text-center mb-1">Signup</h3>
+        {error && (
+          <p className="border border-red-600 text-red-600 bg-red-100 text-xs rounded-md px-3 leading-10 mb-2">
+            {error}
+          </p>
+        )}
         <div className="form-control">
           <label htmlFor="email">Email</label>
           <input
@@ -30,6 +34,9 @@ const Signup = () => {
               required: "Email is required",
             })}
           />
+          <p className="text-red-600 text-xs">
+            {formState.errors?.email?.message}
+          </p>
         </div>
         <div className="form-control">
           <label htmlFor="email">Password</label>
@@ -42,8 +49,12 @@ const Signup = () => {
               required: "Password is required",
             })}
           />
+          <p className="text-red-600 text-xs">
+            {formState.errors?.email?.message}
+          </p>
         </div>
-        <input type="submit" value="signup" className="" />
+
+        <input type="submit" value={"sign up"} className="" />
       </form>
     </div>
   )
