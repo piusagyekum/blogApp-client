@@ -1,4 +1,4 @@
-import  { useContext, useState } from "react"
+import { useContext, useState } from "react"
 import { AuthContext } from "../Context/AuthContext"
 import { UrlContext } from "../Context/UrlContext"
 import { useNavigate } from "react-router-dom"
@@ -26,8 +26,7 @@ const useLogin = () => {
       }
       localStorage.setItem("user", JSON.stringify(data.details))
       dispatch({ type: "LOGIN", payload: data.details })
-          navigate("/home", { replace: true })
-
+      navigate("/home", { replace: true })
     } catch (error) {
       setError(error.message)
     } finally {

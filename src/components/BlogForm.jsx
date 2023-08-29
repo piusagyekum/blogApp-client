@@ -3,20 +3,24 @@ import { DevTool } from "@hookform/devtools"
 import { useContext, useState } from "react"
 import { UrlContext } from "../Context/UrlContext"
 import { BlogContext } from "../Context/BlogContext"
+import { AuthContext } from "../Context/AuthContext"
 const BlogForm = () => {
   const { url } = useContext(UrlContext)
   const { dispatch } = useContext(BlogContext)
+    const { user } = useContext(AuthContext)
+
   const form = useForm()
-  const { register, control, handleSubmit, formState , reset} = form
+  const { register, control, handleSubmit, formState, reset } = form
   const [addingBlog, setAddingBlog] = useState(false)
 
-  const submitFunction = async formData => {
+  const submitFunction = async (formData) => {
     try {
       setAddingBlog(true)
       const response = await fetch(`${url}/blogs/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization" : `Bearer ${user.token}`,
         },
         body: JSON.stringify(formData),
       })
@@ -24,7 +28,6 @@ const BlogForm = () => {
       if (response.ok) {
         dispatch({ type: "ADD_BLOG", payload: json.result })
         reset()
-
       } else {
         throw Error("Response was not in the 200 range")
       }

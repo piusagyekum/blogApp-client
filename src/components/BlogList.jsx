@@ -3,16 +3,20 @@ import { format } from "date-fns"
 import { useContext } from "react"
 import { UrlContext } from "../Context/UrlContext"
 import { BlogContext } from "../Context/BlogContext"
+import { AuthContext } from "../Context/AuthContext"
 
 const BlogList = ({ blog }) => {
   const { url } = useContext(UrlContext)
   const {dispatch} = useContext(BlogContext)
+  const {user} = useContext(AuthContext)
   const deleteBlogFn = async () => {
     try {
       const response = await fetch(`${url}/blogs/${blog._id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${user.token}`,
+          
         },
       })
 

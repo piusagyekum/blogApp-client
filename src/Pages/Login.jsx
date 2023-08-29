@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form"
 import useLogin from "../hooks/useLogin"
-import { useNavigate } from "react-router-dom"
 const Login = () => {
   const { loading, error, login } = useLogin()
 
@@ -35,7 +34,6 @@ const Login = () => {
             {...register("email", {
               required: "Email is required",
             })}
-            onChange={(e) => { console.log(e.target.value) }}
           />
           <p className="text-red-600 text-xs">
             {formState.errors?.email?.message}
