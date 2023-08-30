@@ -9,6 +9,7 @@ const BlogList = ({ blog }) => {
   const { url } = useContext(UrlContext)
   const {dispatch} = useContext(BlogContext)
   const {user} = useContext(AuthContext)
+
   const deleteBlogFn = async () => {
     try {
       const response = await fetch(`${url}/blogs/${blog._id}`, {

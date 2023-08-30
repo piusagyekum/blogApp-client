@@ -7,7 +7,7 @@ import { AuthContext } from "../Context/AuthContext"
 const BlogForm = () => {
   const { url } = useContext(UrlContext)
   const { dispatch } = useContext(BlogContext)
-    const { user } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
 
   const form = useForm()
   const { register, control, handleSubmit, formState, reset } = form
@@ -20,7 +20,7 @@ const BlogForm = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization" : `Bearer ${user.token}`,
+          Authorization: `Bearer ${user.token}`,
         },
         body: JSON.stringify(formData),
       })

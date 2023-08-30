@@ -7,18 +7,17 @@ import { useContext } from "react"
 import { AuthContext } from "./Context/AuthContext"
 
 function App() {
-  const {user} =  useContext(AuthContext)
+  const { user } = useContext(AuthContext)
   const location = useLocation()
-  // const { user } = useContext(AuthContext)
-  console.log("🚀 ~ file: App.jsx:12 ~ App ~ user:", user)
-
 
   return (
     <>
       <Routes>
-        <Route index element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route element={!user ? <Navigate to="/" replace state={{from:location}} /> : <Layout />}>
+        <Route index element={user ? <Navigate to="/home" /> : <Login />} />
+        <Route path="/signup" element={user ? <Navigate to="/home" /> : <Signup />} />
+        <Route
+          element={!user ? <Navigate to="/" replace state={{ from: location }} /> : <Layout />}
+        >
           <Route path="/home" element={<Home />} />
         </Route>
       </Routes>

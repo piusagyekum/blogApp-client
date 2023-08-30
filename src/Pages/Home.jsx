@@ -35,11 +35,7 @@ const Home = () => {
       <div className=" col-span-12 md:col-span-8">
         {blogs && blogs.map((blog) => <BlogList key={blog._id} blog={blog} />)}
         {loading ? <p className="text-center">Loading blogs....</p> : ""}
-        {!loading && blogs.length === 0 ? (
-          <p className="text-center">No blogs to display</p>
-        ) : (
-          ""
-        )}
+        {!loading && blogs.length === 0 ? <p className="text-center">No blogs to display</p> : ""}
       </div>
       <div className=" col-span-12 md:col-span-4">
         <h3 className="font-semibold">Add New Blog</h3>
